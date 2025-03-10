@@ -6,6 +6,8 @@ info:
 servers:
   - url: http://localhost:4004/api/v1
     description: Local development server
+  - url: https://localhost:4004/api/v1
+    description: Local development server (HTTPS)
 
 components:
   schemas:
@@ -155,4 +157,4 @@ paths:
         '200':
           description: Product deleted successfully
         '404':
-          description: Product not found 
+          description: Product not found
