@@ -5,9 +5,9 @@ info:
   version: 1.0.0
 servers:
   - url: http://localhost:4004
-    description: http://localhost:4004
+    description: for server local
   - url: https://product-services-8x46.onrender.com
-    description: https://product-services-8x46.onrender.com
+    description: for server htttps
 
 components:
   schemas:
