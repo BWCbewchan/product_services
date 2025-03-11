@@ -4,9 +4,9 @@ info:
   description: API documentation for the Product Service
   version: 1.0.0
 servers:
-  - url: http://localhost:4004/api/v1
+  - url: http://localhost:4004
     description: Local development server
-  - url: https://localhost:4004/api/v1
+  - url: https://localhost:4004
     description: Local development server (HTTPS)
 
 components:
@@ -158,3 +158,178 @@ paths:
           description: Product deleted successfully
         '404':
           description: Product not found
+
+  /create-product:
+    post:
+      summary: Create a new product
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '201':
+          description: Product created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+
+  /products-new:
+    get:
+      summary: Get new products
+      tags:
+        - Products
+      responses:
+        '200':
+          description: List of new products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+
+  /products-brand/{brand}:
+    get:
+      summary: Get products by brand
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: brand
+          required: true
+          schema:
+            type: string
+          description: The brand name
+      responses:
+        '200':
+          description: List of products by brand
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+
+  /products-category/{category}:
+    get:
+      summary: Get products by category
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: category
+          required: true
+          schema:
+            type: string
+          description: The category name
+      responses:
+        '200':
+          description: List of products by category
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+
+  /products-filters:
+    get:
+      summary: Get products by filters
+      tags:
+        - Products
+      parameters:
+        - in: query
+          name: name
+          schema:
+            type: string
+          description: Filter by product name
+        - in: query
+          name: category
+          schema:
+            type: string
+          description: Filter by category
+        - in: query
+          name: price
+          schema:
+            type: number
+          description: Filter by price
+      responses:
+        '200':
+          description: Filtered list of products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+
+  /price-counts:
+    get:
+      summary: Get price counts by category
+      tags:
+        - Products
+      responses:
+        '200':
+          description: Price counts grouped by category
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /product/{id}/review:
+    post:
+      summary: Add a review to a product
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: The product ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                rating:
+                  type: number
+                comment:
+                  type: string
+      responses:
+        '201':
+          description: Review added successfully
+
+  /productsImage:
+    post:
+      summary: Upload product image
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Image uploaded successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  url:
+                    type: string
