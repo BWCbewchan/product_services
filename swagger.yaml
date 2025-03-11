@@ -333,3 +333,28 @@ paths:
                 properties:
                   url:
                     type: string
+
+  /products/search:
+    get:
+      summary: Search products
+      tags:
+        - Products
+      parameters:
+        - in: query
+          name: query
+          schema:
+            type: string
+          description: Search query
+      responses:
+        '200':
+          description: List of products matching the search query
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        '400':
+          description: Query parameter is required
+        '500':
+          description: Error searching for products
