@@ -15,6 +15,7 @@ const port = process.env.PORT || 4004;
 // Kết nối DB
 connectDB();
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 // Danh sách origin được phép
 const allowedOrigins = [
   process.env.FRONTEND_URL || "http://localhost:2000",
@@ -27,6 +28,7 @@ console.log("Allowed Origins:", allowedOrigins);
 app.use(
   cors({
     origin: function (origin, callback) {
+      console.log("Origin:", origin); // Add logging to see the origin of the request
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {

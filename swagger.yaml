@@ -5,8 +5,8 @@ info:
   version: 1.0.0
 servers:
   - url: http://localhost:4004
-    description: https://product-services-8x46.onrender.com
-  - url: https://localhost:4004
+    description: http://localhost:4004
+  - url: https://product-services-8x46.onrender.com
     description: https://product-services-8x46.onrender.com
 
 components:
