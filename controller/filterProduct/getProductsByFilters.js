@@ -45,24 +45,17 @@ async function getProductsByFilters(req, res) {
     const skip = (parseInt(page) - 1) * parseInt(limit);
 
     // Thực hiện query với pagination
-    const [products, total] = await Promise.all([
-      ProductModel.find(query)
-        .sort(sortOptions)
-        .skip(skip)
-        .limit(parseInt(limit)),
-      ProductModel.countDocuments(query)
-    ]);
+    const products = await ProductModel.find(query)
+      .sort(sortOptions)
+      .skip(skip)
+      .limit(parseInt(limit));
 
+    // Trả về kết quả theo format yêu cầu
     res.status(200).json({
-      data: {
-        products,
-        total,
-        currentPage: parseInt(page),
-        totalPages: Math.ceil(total / parseInt(limit)),
-        limit: parseInt(limit)
-      }
+      data: products
     });
   } catch (error) {
+    console.error('Error in getProductsByFilters:', error);
     res.status(400).json({ message: "Lỗi khi lấy danh sách sản phẩm", error });
   }
 }
