@@ -7,7 +7,7 @@ const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 const swaggerDocument = YAML.load('./swagger.yaml');
 const morgan = require('morgan');
-
+const compression = require("compression");
 dotenv.config();
 const app = express();
 
@@ -18,7 +18,7 @@ connectDB();
 
 // Sử dụng morgan để ghi lại các request với định dạng "dev"
 app.use(morgan("dev"));
-
+app.use(compression())
 // Cấu hình Swagger
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
