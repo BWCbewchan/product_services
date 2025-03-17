@@ -33,13 +33,13 @@ router.get("/products-filters", getProductsByFilters);
 router.get("/price-counts", getPriceCountsByCategory);
 
 // Route lấy chi tiết sản phẩm theo ID
-router.get("/product/:id", getProductById);
+router.get("/products/:id", getProductById);
 
 // Route cập nhật sản phẩm theo ID
-router.put("/product/:id", updateProduct);
+router.put("/products/:id", updateProduct);
 
 // Route xóa sản phẩm theo ID
-router.delete("/product/:id", deleteProduct);
+router.delete("/products/:id", deleteProduct);
 
 // Route thêm đánh giá cho sản phẩm theo ID
 router.post("/product/:id/review", addReview);
